@@ -8,8 +8,7 @@ require([
    'css!../app/DA-ESS-ContentUpdate/escu_summary.css',
    'splunkjs/mvc/simplexml/ready!'
  ], function(_, $, mvc, SearchManager) {
-    $('.es-soc-analytic-story-stats').html(_.template('<%- _("Analytic Stories Stats").t() %>'));
-    $('.es-soc-analytic-story-table').html(_.template('<%- _("Analytic Story Summary").t() %>'));
+    $('.es-soc-analytic-story-stats').html(_.template('<%- _("Analytic Story Summary").t() %>'));
     $('.es-soc-search-stats').html(_.template('<%- _("Search Summary").t() %>'));
 
     let tokenModel = mvc.Components.get('default');

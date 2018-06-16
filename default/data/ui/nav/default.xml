@@ -4,4 +4,6 @@
   <view name="feedback"/>
   <view name="search"/>
   <view name="escu_usage"/>
+  <a href="http://docs.splunk.com/Documentation/ESSOC">Docs</a>
+  <a href="/app/DA-ESS-ContentUpdate/escu_summary?tour=escu_tour">Take a Tour</a>
 </nav>

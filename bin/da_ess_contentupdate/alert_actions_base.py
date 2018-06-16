@@ -2,10 +2,7 @@ import csv
 import gzip
 import sys
 
-try:
-    from splunk.clilib.bundle_paths import make_splunkhome_path
-except ImportError:
-    from splunk.appserver.mrsparkle.lib.util import make_splunkhome_path
+from splunk.clilib.bundle_paths import make_splunkhome_path
 
 sys.path.insert(0, make_splunkhome_path(["etc", "apps", "Splunk_SA_CIM", "lib"]))
 

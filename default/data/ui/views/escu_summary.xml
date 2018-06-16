@@ -2,7 +2,7 @@
   <label>Content Library</label>
   <description>Explore the Analytic Stories included with ES Content Updates.</description>
   <!-- Example uses stats transforming command -->
-  <!-- This limits events passed to post-process search -->
+  <!-- This limits evnts passed to post-process search -->
   <title>Content Library</title>
   <search id="baseSS">
     <query>| rest /services/saved/searches splunk_server=local count=0 | search title="ESCU - *"</query>
@@ -23,15 +23,10 @@
             <html>
                 <ul id="tabs_list" class="nav nav-tabs">
                   <li class="active">
-                      <a href="#" class="toggle-tab es-soc-analytic-story-stats" data-toggle="tab" data-elements="anaylytic_stories_header_stats,analytic_stories_viz,kill_chain_viz,analytic_stories_details_table">
+                      <a href="#" class="toggle-tab es-soc-analytic-story-stats" data-toggle="tab" data-elements="analytic_stories_header_stats,analytic_stories_viz,kill_chain_viz,analytic_stories_details_table">
                         Analytic Story Summary
                       </a>
                   </li>
-                  <!-- <li>
-                      <a href="#" class="toggle-tab es-soc-analytic-story-table" data-toggle="tab" data-elements="analytic_stories_details_table">
-                        Analytic Stories Summary
-                      </a>
-                  </li> -->
                   <li>
                       <a href="#" class="toggle-tab es-soc-search-stats" data-toggle="tab" data-elements="search_stats_header,search_stats_viz,tab_search_type_table">
                         Search Summary
@@ -43,7 +38,7 @@
   </row>
 
   <!-- Rows for  Analytic Story Stats -->
-    <row id="anaylytic_stories_header_stats">
+    <row id="analytic_stories_header_stats">
         <panel>
             <single>
                 <title>Total Analytic Stories</title>
@@ -68,14 +63,17 @@
         </panel>
         <panel>
             <single>
-                <title>Analytic Stories Updated in Last 2 Weeks</title>
-                <search base="baseAS">
-                <query>convert timeformat="%Y-%m-%d" mktime(modification_date) | where modification_date &gt; relative_time(now(),"-14d@d") | stats count</query>
+                <title>ESCU App Version</title>
+                <search id="version">
+                    <query>| rest /services/apps/local | search label="ES Content Updates" disabled=0 | table version</query>
                 </search>
-                <option name="drilldown">none</option>
                 <option name="colorBy">value</option>
                 <option name="colorMode">block</option>
+                <option name="drilldown">none</option>
                 <option name="numberPrecision">0</option>
+                <option name="rangeColors">["0x555","0x65a637"]</option>
+                <option name="rangeValues">[0]</option>
+                <option name="refresh.display">progressbar</option>
                 <option name="showSparkline">1</option>
                 <option name="showTrendIndicator">1</option>
                 <option name="trendColorInterpretation">standard</option>
@@ -83,15 +81,13 @@
                 <option name="unitPosition">after</option>
                 <option name="useColors">1</option>
                 <option name="useThousandSeparators">1</option>
-                <option name="rangeColors">["0x555","0x65a637"]</option>
-                <option name="rangeValues">[0]</option>
             </single>
         </panel>
     </row>
     <row id="analytic_stories_viz">
         <panel>
             <title>
-                Categories
+                Story Categories
             </title>
             <chart>
                 <search>
@@ -101,8 +97,12 @@
                     <set token="form.as_category">$click.value$</set>
                     <set token="as_category" prefix="&quot;" suffix="&quot;">$click.value$</set>
                 </drilldown>
-                <option name="charting.chart">pie</option>
-                <option name="charting.legend.placement">left</option>
+                <option name="charting.chart">bar</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.legend.placement">none</option>
+                <option name="charting.axisLabelsX.integerUnits">true</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.axisTitleY.visibility">collapsed</option>
             </chart>
         </panel>
         <panel>
@@ -121,6 +121,7 @@
                     <set token="form.as_cis">$click.value$</set>
                     <set token="as_cis">$click.value$</set>
                 </drilldown>
+                <option name="charting.legend.placement">none</option>
             </chart>
         </panel>
     </row>
@@ -156,7 +157,7 @@
                     </div>
                     <div class="killchain_card notfirst">
                         <div class="killchain" style="background-color:#8A554B;">
-                            <div class="killchain-text" id="exploit">0</div>
+                            <div class="killchain-text" id="exploitation">0</div>
                         </div>  
                         <div>
                             <p class="killchain-label">Exploitation</p>
@@ -180,7 +181,7 @@
                     </div>
                     <div class="killchain_card notfirst">
                         <div class="killchain" style="background-color:#D6563C;">
-                            <div class="killchain-text" id="actionsonobjective">0</div>
+                            <div class="killchain-text" id="actionsonobjectives">0</div>
                         </div>  
                         <div>
                             <p class="killchain-label">Actions on Objectives</p>
@@ -365,7 +366,6 @@
                 Search Types
             </title>
             <chart>
-                <title></title>
                 <search>
                 <query>
                 | rest /services/saved/searches splunk_server=local count=0
@@ -378,8 +378,11 @@
                     <set token="searchtype">$click.value$</set>
                     <set token="form.searchtype">$click.value$</set>
                 </drilldown>
-                <option name="charting.chart">pie</option>
-                <option name="charting.legend.placement">left</option>
+                <option name="charting.chart">bar</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.legend.placement">none</option>
+                <option name="charting.axisTitleX.visibility">collapsed</option>
+                <option name="charting.axisTitleY.visibility">collapsed</option>
             </chart>
         </panel>
     </row>

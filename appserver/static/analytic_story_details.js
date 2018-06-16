@@ -144,7 +144,7 @@ require([
             earliest_time: "-1h@h",
             latest_time: "now",
             cache: false,
-            search: "| rest /services/configs/conf-analytic_stories splunk_server=local count=0 | search title=\"" + asName + "\" | spath input=kill_chain_phases path={} output=kcp | spath input=providing_technologies path={} output=tex | spath input=reference path={} output=ref | spath input=data_models path={} output=dm | table title, category, description, version, mappings, creation_date, modification_date, dm, narrative, tex, ref"
+            search: "| rest /services/configs/conf-analytic_stories splunk_server=local count=0 | search title=\"" + asName + "\" | spath input=providing_technologies path={} output=tex | spath input=reference path={} output=ref | spath input=data_models path={} output=dm | table title, category, description, version, mappings, creation_date, modification_date, dm, narrative, tex, ref"
         });
 
         $('.run-story').unbind('click');
@@ -176,7 +176,7 @@ require([
             earliest_time: "-1h@h",
             latest_time: "now",
             cache: false,
-            search: "| rest /services/saved/searches splunk_server=local count=0 | spath input=action.escu.analytic_story path={} output=uc | search uc = \"" + asName + "\" | spath input=action.escu.data_models path={} output=dm | spath input=action.escu.kill_chain_phases path={} output=kcp | spath input=action.escu.providing_technologies path={} output=tex | table action.escu.full_search_name, search, description, action.escu.search_type, action.escu.how_to_implement, action.escu.eli5, action.escu.version, action.escu.mappings, dm, tex, action.escu.asset_at_risk, action.escu.confidence, action.escu.known_false_positives, updated, action.escu.modification_date, action.escu.creation_date "
+            search: "| rest /services/saved/searches splunk_server=local count=0 | spath input=action.escu.analytic_story path={} output=uc | search uc = \"" + asName + "\" | spath input=action.escu.data_models path={} output=dm | spath input=action.escu.providing_technologies path={} output=tex | table action.escu.full_search_name, search, description, action.escu.search_type, action.escu.how_to_implement, action.escu.eli5, action.escu.version, action.escu.mappings, dm, tex, action.escu.asset_at_risk, action.escu.confidence, action.escu.known_false_positives, updated, action.escu.modification_date, action.escu.creation_date "
 
         });
         var searchesSearch  = splunkjs.mvc.Components.getInstance("s"+epoch);
@@ -379,7 +379,7 @@ require([
 
                 let detectionLeftAttr = `<div class="search_left_attr">
                     <div class="search_right_attr_label">
-                        <strong>ELI5</strong>
+                        <strong>Explain It Like I'm 5</strong>
                     </div>
                     <div class="search_left_attr_value">
                         ${ search['action.escu.eli5'] }
