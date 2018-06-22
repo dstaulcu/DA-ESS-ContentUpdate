@@ -37,7 +37,11 @@ class RunStoryCommand(GeneratingCommand):
             item_count = 0
             runstory_results = {}
 
-            kwargs = {"exec_mode": "normal", "dispatch.earliest_time": search_results.search_et, "dispatch.latest_time": search_results.search_lt}
+            if hasattr(search_results, 'search_et') and hasattr(search_results, 'search_lt'):
+                kwargs = {"exec_mode": "normal", "dispatch.earliest_time": search_results.search_et, "dispatch.latest_time": search_results.search_lt}
+            else:
+                kwargs = {"exec_mode": "normal"}
+
             spl = search['search']
             if spl[0] != "|":
                 spl = "| search %s" % spl
