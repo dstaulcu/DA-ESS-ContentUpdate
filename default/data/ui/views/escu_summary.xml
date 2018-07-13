@@ -65,7 +65,7 @@
             <single>
                 <title>ESCU App Version</title>
                 <search id="version">
-                    <query>| rest /services/apps/local | search label="ES Content Updates" disabled=0 | table version</query>
+                    <query>| rest /services/apps/local splunk_server=local count=0 | search label="ES Content Updates" disabled=0 | table version</query>
                 </search>
                 <option name="colorBy">value</option>
                 <option name="colorMode">block</option>
